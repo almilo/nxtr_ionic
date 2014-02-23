@@ -54,13 +54,7 @@ module.exports = function (grunt) {
             img: {
                 expand: true,
                 cwd: 'app/src/',
-                src: 'img/**',
-                dest: 'build/www/'
-            },
-            index: {
-                expand: true,
-                cwd: 'app/src/',
-                src: 'index.html',
+                src: ['img/**', 'index.html'],
                 dest: 'build/www/'
             }
         },
@@ -93,11 +87,6 @@ module.exports = function (grunt) {
             options: {
                 base: 'build/www'
             },
-            testserver: {
-                options: {
-                    port: 9999
-                }
-            },
             devserver: {
                 options: {
                     port: 7777,
@@ -110,6 +99,11 @@ module.exports = function (grunt) {
                     port: 8888,
                     keepalive: true,
                     open: true
+                }
+            },
+            testserver: {
+                options: {
+                    port: 9999
                 }
             }
         },
