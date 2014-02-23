@@ -14,6 +14,13 @@ module.exports = function (grunt) {
             },
             protractor_start: {
                 command: 'node ./node_modules/protractor/bin/webdriver-manager start'
+            },
+            ios_start: {
+                command: [
+                    'cd build',
+                    'ionic build ios',
+                    'ionic emulate ios'
+                ].join('&&')
             }
         },
 
@@ -114,5 +121,7 @@ module.exports = function (grunt) {
     grunt.registerTask('dev', ['clean', 'build', 'connect:devserver', 'watch']);
 
     grunt.registerTask('serve', ['clean', 'build', 'connect:webserver']);
+
+    grunt.registerTask('ios', ['clean', 'build', 'shell:ios_start']);
 
 };
