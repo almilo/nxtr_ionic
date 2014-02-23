@@ -8,14 +8,14 @@ angular.module('nxtr', ['ionic'])
     .state('tab', {
       url: "/tab",
       abstract: true,
-      templateUrl: "templates/tabs.html"
+      templateUrl: "js/tabs.tpl.html"
     })
 
     .state('tab.about', {
       url: '/about',
       views: {
         'about-tab': {
-          templateUrl: 'templates/about.html'
+          templateUrl: 'js/about/about.tpl.html'
         }
       }
     });

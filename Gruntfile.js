@@ -60,6 +60,13 @@ module.exports = function (grunt) {
                     port: 9999
                 }
             },
+            devserver: {
+                options: {
+                    port: 7777,
+                    livereload: true,
+                    open: true
+                }
+            },
             webserver: {
                 options: {
                     port: 8888,
@@ -82,6 +89,16 @@ module.exports = function (grunt) {
                     }
                 }
             }
+        },
+
+        watch: {
+            options: {
+                livereload: true
+            },
+            app: {
+                files: ['app/**'],
+                tasks: ['build']
+            }
         }
 
     });
@@ -93,6 +110,8 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['clean', 'build']);
 
     grunt.registerTask('test:e2e', ['connect:testserver', 'shell:protractor_start', 'protractor']);
+
+    grunt.registerTask('dev', ['clean', 'build', 'connect:devserver', 'watch']);
 
     grunt.registerTask('serve', ['clean', 'build', 'connect:webserver']);
 

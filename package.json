@@ -12,6 +12,7 @@
     "grunt-shell": "~0.6.4",
     "protractor": "~0.19.0",
     "grunt-contrib-connect": "~0.7.0",
-    "grunt-protractor-runner": "~0.2.3"
+    "grunt-protractor-runner": "~0.2.3",
+    "grunt-contrib-watch": "~0.5.3"
   }
 }
