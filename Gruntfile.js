@@ -46,7 +46,21 @@ module.exports = function (grunt) {
                 src: '**',
                 dest: 'build/www/'
             }
+        },
+
+        connect: {
+            options: {
+                base: 'build/www'
+            },
+            webserver: {
+                options: {
+                    port: 8888,
+                    keepalive: true,
+                    open: true
+                }
+            }
         }
+
     });
 
     grunt.registerTask('install', ['shell:protractor_install']);
@@ -54,5 +68,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', ['copy']);
 
     grunt.registerTask('default', ['clean', 'build']);
+
+    grunt.registerTask('serve', ['clean', 'build', 'connect:webserver']);
 
 };
