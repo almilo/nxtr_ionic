@@ -8,8 +8,7 @@ module.exports = function (config) {
             'build/www/lib/js/angular/angular-mocks.js',
 
             // app
-            'build/www/js/**/*Module.js',
-            'build/www/js/**/*.js',
+            'build/www/app.js',
 
             // tests
             'app/src/js/**/*.spec.js'
