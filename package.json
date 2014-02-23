@@ -1,0 +1,10 @@
+{
+  "name": "nxtr",
+  "version": "0.0.1",
+  "description": "The Next Train Mobile App with the ionic framework and AngularJS",
+  "author": "almilo",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.2"
+  }
+}
