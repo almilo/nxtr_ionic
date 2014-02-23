@@ -1,6 +1,4 @@
-*.keystore
-*.sw*
-platforms/^.*
 .idea
 *.iml
 node_modules
+build
