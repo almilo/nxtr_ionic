@@ -11,6 +11,9 @@ module.exports = function (grunt) {
             },
             protractor_install: {
                 command: 'node ./node_modules/protractor/bin/webdriver-manager update'
+            },
+            protractor_start: {
+                command: 'node ./node_modules/protractor/bin/webdriver-manager start'
             }
         },
 
@@ -52,11 +55,31 @@ module.exports = function (grunt) {
             options: {
                 base: 'build/www'
             },
+            testserver: {
+                options: {
+                    port: 9999
+                }
+            },
             webserver: {
                 options: {
                     port: 8888,
                     keepalive: true,
                     open: true
+                }
+            }
+        },
+
+        protractor: {
+            options: {
+                keepAlive: true,
+                configFile: "./app/test/e2e/protractor.conf.js"
+            },
+            auto: {
+                keepAlive: true,
+                options: {
+                    args: {
+                        seleniumPort: 4444
+                    }
                 }
             }
         }
@@ -68,6 +91,8 @@ module.exports = function (grunt) {
     grunt.registerTask('build', ['copy']);
 
     grunt.registerTask('default', ['clean', 'build']);
+
+    grunt.registerTask('test:e2e', ['connect:testserver', 'shell:protractor_start', 'protractor']);
 
     grunt.registerTask('serve', ['clean', 'build', 'connect:webserver']);
 
