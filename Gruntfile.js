@@ -51,12 +51,6 @@ module.exports = function (grunt) {
                 src: '**',
                 dest: 'build/www/lib/'
             },
-            css: {
-                expand: true,
-                cwd: 'app/src/',
-                src: 'css/**',
-                dest: 'build/www/'
-            },
             img: {
                 expand: true,
                 cwd: 'app/src/',
@@ -80,14 +74,18 @@ module.exports = function (grunt) {
         },
 
         concat_sourcemap: {
-            app: {
+            js: {
                 src: [
                     'app/src/js/**/*Module.js',
                     'app/src/js/**/*.js',
-                    '!app/src/js/**/*.spec.js',
-                    'temp/templates.js'
+                    'temp/templates.js',
+                    '!app/src/js/**/*.spec.js'
                 ],
                 dest: 'build/www/app.js'
+            },
+            css: {
+                src: 'app/src/css/**/*.css',
+                dest: 'build/www/app.css'
             }
         },
 
