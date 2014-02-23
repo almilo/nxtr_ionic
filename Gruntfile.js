@@ -106,22 +106,40 @@ module.exports = function (grunt) {
                 files: ['app/**'],
                 tasks: ['build']
             }
+        },
+
+        karma: {
+            unit: {
+                configFile: './app/test/unit/karma.conf.js',
+                autoWatch: false,
+                singleRun: true
+            },
+            unit_autowatch: {
+                configFile: './app/test/unit/karma.conf.js',
+                autoWatch: true,
+                singleRun: false
+            }
         }
 
     });
 
+
+    // Install tasks
     grunt.registerTask('install', ['shell:protractor_install']);
 
+    // Build tasks
     grunt.registerTask('build', ['copy']);
 
-    grunt.registerTask('default', ['clean', 'build']);
-
+    // Test tasks
+    grunt.registerTask('test:unit', ['karma:unit']);
     grunt.registerTask('test:e2e', ['connect:testserver', 'shell:protractor_start', 'protractor']);
+    grunt.registerTask('test', ['test:unit', 'test:e2e']);
 
     grunt.registerTask('dev', ['clean', 'build', 'connect:devserver', 'watch']);
-
     grunt.registerTask('serve', ['clean', 'build', 'connect:webserver']);
-
     grunt.registerTask('ios', ['clean', 'build', 'shell:ios_start']);
+
+    // Default task
+    grunt.registerTask('default', ['clean', 'build', 'test']);
 
 };
