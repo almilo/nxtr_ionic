@@ -5,6 +5,15 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        shell: {
+            options: {
+                stdout: true
+            },
+            protractor_install: {
+                command: 'node ./node_modules/protractor/bin/webdriver-manager update'
+            }
+        },
+
         clean: {
             build: 'build'
         },
@@ -40,7 +49,10 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.registerTask('install', ['shell:protractor_install']);
+
     grunt.registerTask('build', ['copy']);
+
     grunt.registerTask('default', ['clean', 'build']);
 
 };
