@@ -6,14 +6,14 @@ angular.module('nxtr', ['ionic', 'nxtr.search'])
             .state('tab', {
                 url: "/tab",
                 abstract: true,
-                templateUrl: "js/tabs.tpl.html"
+                templateUrl: "tabs.tpl.html"
             })
 
             .state('tab.search', {
                 url: '/search',
                 views: {
                     'search-tab': {
-                        templateUrl: 'js/search/search.tpl.html',
+                        templateUrl: 'search/search.tpl.html',
                         controller: 'SearchCtrl'
                     }
                 }
@@ -23,7 +23,7 @@ angular.module('nxtr', ['ionic', 'nxtr.search'])
                 url: '/about',
                 views: {
                     'about-tab': {
-                        templateUrl: 'js/about/about.tpl.html'
+                        templateUrl: 'about/about.tpl.html'
                     }
                 }
             });

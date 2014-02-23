@@ -25,7 +25,8 @@ module.exports = function (grunt) {
         },
 
         clean: {
-            build: 'build'
+            build: 'build',
+            temp: 'temp'
         },
 
         copy: {
@@ -50,11 +51,43 @@ module.exports = function (grunt) {
                 src: '**',
                 dest: 'build/www/lib/'
             },
-            src: {
+            css: {
                 expand: true,
                 cwd: 'app/src/',
-                src: '**',
+                src: 'css/**',
                 dest: 'build/www/'
+            },
+            img: {
+                expand: true,
+                cwd: 'app/src/',
+                src: 'img/**',
+                dest: 'build/www/'
+            },
+            index: {
+                expand: true,
+                cwd: 'app/src/',
+                src: 'index.html',
+                dest: 'build/www/'
+            }
+        },
+
+        ngtemplates: {
+            nxtr: {
+                cwd: 'app/src/js/',
+                src: '**/*.tpl.html',
+                dest: 'temp/templates.js'
+            }
+        },
+
+        concat_sourcemap: {
+            app: {
+                src: [
+                    'app/src/js/**/*Module.js',
+                    'app/src/js/**/*.js',
+                    '!app/src/js/**/*.spec.js',
+                    'temp/templates.js'
+                ],
+                dest: 'build/www/app.js'
             }
         },
 
@@ -128,7 +161,7 @@ module.exports = function (grunt) {
     grunt.registerTask('install', ['shell:protractor_install']);
 
     // Build tasks
-    grunt.registerTask('build', ['copy']);
+    grunt.registerTask('build', ['copy', 'ngtemplates', 'concat_sourcemap']);
 
     // Test tasks
     grunt.registerTask('test:unit', ['karma:unit']);
