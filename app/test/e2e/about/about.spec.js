@@ -1,7 +1,7 @@
 describe('about page', function () {
 
     beforeEach(function () {
-        browser.get('');
+        browser.get('#/tab/about');
     });
 
     it('should contain Next Train', function () {

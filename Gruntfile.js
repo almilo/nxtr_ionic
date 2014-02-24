@@ -13,9 +13,6 @@ module.exports = function (grunt) {
             protractor_install: {
                 command: 'node ./node_modules/protractor/bin/webdriver-manager update'
             },
-            protractor_start: {
-                command: 'node ./node_modules/protractor/bin/webdriver-manager start'
-            },
             ios_start: {
                 command: [
                     'cd build',
@@ -112,8 +109,9 @@ module.exports = function (grunt) {
 
         protractor: {
             options: {
-                keepAlive: true,
                 configFile: "./app/test/e2e/protractor.conf.js"
+            },
+            singlerun: {
             },
             auto: {
                 keepAlive: true,
@@ -159,7 +157,7 @@ module.exports = function (grunt) {
 
     // Test tasks
     grunt.registerTask('test:unit', ['karma:unit']);
-    grunt.registerTask('test:e2e', ['connect:testserver', 'shell:protractor_start', 'protractor']);
+    grunt.registerTask('test:e2e', ['connect:testserver', 'protractor:singlerun']);
     grunt.registerTask('test', ['test:unit', 'test:e2e']);
 
     grunt.registerTask('dev', ['clean', 'build', 'connect:devserver', 'watch']);
