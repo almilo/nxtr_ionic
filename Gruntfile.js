@@ -18,6 +18,7 @@ module.exports = function (grunt) {
             ios_start: {
                 command: [
                     'cd build',
+                    'ionic platform ios',
                     'ionic build ios',
                     'ionic emulate ios'
                 ].join('&&')
