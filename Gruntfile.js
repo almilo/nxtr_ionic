@@ -113,7 +113,7 @@ module.exports = function (grunt) {
             },
             singlerun: {
             },
-            auto: {
+            autowatch: {
                 keepAlive: true,
                 options: {
                     args: {
