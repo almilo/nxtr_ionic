@@ -1,10 +1,15 @@
-describe('about page', function () {
+describe('About page', function () {
+
+    var activateWebView = require('../helpers').activateWebView;
 
     beforeEach(function () {
-        browser.get('#/tab/about');
+        activateWebView(browser);
+        browser.get('');
+
+        element(by.linkText('About')).click();
     });
 
-    it('should contain Next Train', function () {
+    it('should contain About Next Train', function () {
         expect(browser.getTitle()).toContain('About Next Train');
     });
 

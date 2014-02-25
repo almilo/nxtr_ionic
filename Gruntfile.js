@@ -1,5 +1,6 @@
 module.exports = function (grunt) {
 
+    var path = require('path');
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
     grunt.initConfig({
@@ -13,11 +14,16 @@ module.exports = function (grunt) {
             protractor_install: {
                 command: 'node ./node_modules/protractor/bin/webdriver-manager update'
             },
-            ios_start: {
+            ios_build: {
                 command: [
                     'cd build',
                     'ionic platform ios',
-                    'ionic build ios',
+                    'ionic build ios'
+                ].join('&&')
+            },
+            ios_start: {
+                command: [
+                    'cd build',
                     'ionic emulate ios'
                 ].join('&&')
             }
@@ -111,15 +117,27 @@ module.exports = function (grunt) {
             options: {
                 configFile: "./app/test/e2e/protractor.conf.js"
             },
-            ios: {
+            ios_safari: {
                 options: {
                     args: {
                         seleniumPort: 4723,
-
                         capabilities: {
                             browserName: '',
                             device: 'iphone',
                             app: 'safari'
+                        }
+                    }
+                }
+            },
+            ios_app: {
+                options: {
+                    args: {
+                        baseUrl: '',
+                        seleniumPort: 4723,
+                        capabilities: {
+                            browserName: '',
+                            device: 'iphone',
+                            app: path.resolve('build/platforms/ios/build/emulator/NxtrApp.app')
                         }
                     }
                 }
@@ -166,12 +184,13 @@ module.exports = function (grunt) {
     // Test tasks
     grunt.registerTask('test:unit', ['karma:unit']);
     grunt.registerTask('test:e2e', ['connect:testserver', 'protractor:singlerun']);
-    grunt.registerTask('test:e2e_ios', ['connect:testserver', 'protractor:ios']);
+    grunt.registerTask('test:e2e_ios_safari', ['connect:testserver', 'protractor:ios_safari']);
+    grunt.registerTask('test:e2e_ios_app', ['shell:ios_build', 'protractor:ios_app']);
     grunt.registerTask('test', ['test:unit', 'test:e2e']);
 
     grunt.registerTask('dev', ['clean', 'build', 'connect:devserver', 'watch']);
     grunt.registerTask('serve', ['clean', 'build', 'connect:webserver']);
-    grunt.registerTask('ios', ['clean', 'build', 'shell:ios_start']);
+    grunt.registerTask('ios', ['clean', 'build', 'shell:ios_build', 'shell:ios_start']);
 
     // Default task
     grunt.registerTask('default', ['clean', 'build', 'test']);
