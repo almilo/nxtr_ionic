@@ -14,6 +14,12 @@ module.exports = function (grunt) {
             protractor_install: {
                 command: 'node ./node_modules/protractor/bin/webdriver-manager update'
             },
+            appium_start: {
+                command: 'node ./node_modules/appium/bin/appium',
+                options: {
+                    async: true
+                }
+            },
             ios_build: {
                 command: [
                     'cd build',
@@ -31,7 +37,8 @@ module.exports = function (grunt) {
 
         clean: {
             build: 'build',
-            temp: 'temp'
+            temp: 'temp',
+            instrumentscli: 'instrumentscli*/'
         },
 
         copy: {
@@ -184,8 +191,8 @@ module.exports = function (grunt) {
     // Test tasks
     grunt.registerTask('test:unit', ['karma:unit']);
     grunt.registerTask('test:e2e', ['connect:testserver', 'protractor:singlerun']);
-    grunt.registerTask('test:e2e_ios_safari', ['connect:testserver', 'protractor:ios_safari']);
-    grunt.registerTask('test:e2e_ios_app', ['shell:ios_build', 'protractor:ios_app']);
+    grunt.registerTask('test:e2e_ios_safari', ['connect:testserver', 'shell:appium_start', 'protractor:ios_safari', 'shell:appium_start:kill']);
+    grunt.registerTask('test:e2e_ios_app', ['shell:ios_build', 'shell:appium_start', 'protractor:ios_app', 'shell:appium_start:kill']);
     grunt.registerTask('test', ['test:unit', 'test:e2e']);
 
     grunt.registerTask('dev', ['clean', 'build', 'connect:devserver', 'watch']);
