@@ -111,15 +111,23 @@ module.exports = function (grunt) {
             options: {
                 configFile: "./app/test/e2e/protractor.conf.js"
             },
+            ios: {
+                options: {
+                    args: {
+                        seleniumPort: 4723,
+
+                        capabilities: {
+                            browserName: '',
+                            device: 'iphone',
+                            app: 'safari'
+                        }
+                    }
+                }
+            },
             singlerun: {
             },
             autowatch: {
-                keepAlive: true,
-                options: {
-                    args: {
-                        seleniumPort: 4444
-                    }
-                }
+                keepAlive: true
             }
         },
 
@@ -158,6 +166,7 @@ module.exports = function (grunt) {
     // Test tasks
     grunt.registerTask('test:unit', ['karma:unit']);
     grunt.registerTask('test:e2e', ['connect:testserver', 'protractor:singlerun']);
+    grunt.registerTask('test:e2e_ios', ['connect:testserver', 'protractor:ios']);
     grunt.registerTask('test', ['test:unit', 'test:e2e']);
 
     grunt.registerTask('dev', ['clean', 'build', 'connect:devserver', 'watch']);
