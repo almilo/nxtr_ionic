@@ -127,6 +127,7 @@ module.exports = function (grunt) {
             ios_safari: {
                 options: {
                     args: {
+                        baseUrl: 'http://localhost:9999',
                         seleniumPort: 4723,
                         capabilities: {
                             browserName: '',
@@ -150,9 +151,26 @@ module.exports = function (grunt) {
                 }
             },
             singlerun: {
+                options: {
+                    args: {
+                        baseUrl: 'http://localhost:9999',
+                        capabilities: {
+                            'browserName': 'chrome'
+                        }
+                    }
+                }
             },
             autowatch: {
-                keepAlive: true
+                keepAlive: true,
+                options: {
+                    args: {
+                        baseUrl: 'http://localhost:9999',
+
+                        capabilities: {
+                            'browserName': 'chrome'
+                        }
+                    }
+                }
             }
         },
 
