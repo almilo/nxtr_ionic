@@ -35,3 +35,4 @@ Pending goals:
  - Integrate with Travis CI
  - Automate code signing
  - Deliver the signed application to a public web server
+ - Implement the real functionality ;)
