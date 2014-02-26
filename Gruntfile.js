@@ -213,11 +213,17 @@ module.exports = function (grunt) {
     grunt.registerTask('test:e2e_ios_app', ['shell:ios_build', 'shell:appium_start', 'protractor:ios_app', 'shell:appium_start:kill']);
     grunt.registerTask('test', ['test:unit', 'test:e2e']);
 
+    // Task to support the 'dev flow' that builds the web application, starts a web server with 'livereload' and
+    // watches the source files to reload the application when changes are saved
     grunt.registerTask('dev', ['clean', 'build', 'connect:devserver', 'watch']);
+
+    // Builds and opens the web application in the default browser
     grunt.registerTask('serve', ['clean', 'build', 'connect:webserver']);
+
+    // Builds and opens the Cordova application in the iOS emulator (requires a Mac computer with XCode)
     grunt.registerTask('ios', ['clean', 'build', 'shell:ios_build', 'shell:ios_start']);
 
-    // Default task
+    // Builds the web application and performs a test run (both unit and e2e)
     grunt.registerTask('default', ['clean', 'build', 'test']);
 
 };
