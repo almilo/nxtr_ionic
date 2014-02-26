@@ -23,14 +23,14 @@ module.exports = function (grunt) {
             ios_build: {
                 command: [
                     'cd build',
-                    'ionic platform ios',
-                    'ionic build ios'
+                    '../node_modules/ionic/bin/ionic platform ios',
+                    '../node_modules/ionic/bin/ionic build ios'
                 ].join('&&')
             },
             ios_start: {
                 command: [
                     'cd build',
-                    'ionic emulate ios'
+                    '../node_modules/ionic/bin/ionic emulate ios'
                 ].join('&&')
             }
         },

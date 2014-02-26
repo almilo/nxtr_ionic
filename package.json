@@ -27,6 +27,7 @@
     "grunt-concat-sourcemap": "~0.4.1",
     "grunt-angular-templates": "~0.5.3",
     "grunt-shell-spawn": "~0.3.0",
-    "appium": "~0.15.0"
+    "appium": "~0.15.0",
+    "ionic": "~0.9.16"
   }
 }
