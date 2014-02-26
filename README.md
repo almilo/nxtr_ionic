@@ -31,7 +31,6 @@ Grunt goals:
  - 'grunt ios': builds and opens the Cordova application in the iOS emulator (requires a Mac computer with XCode)
 
 Pending goals:
- - Make Karma tests run within the 'dev flow'
  - Integrate with Travis CI
  - Automate code signing
  - Deliver the signed application to a public web server

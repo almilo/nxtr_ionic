@@ -179,8 +179,8 @@ module.exports = function (grunt) {
                 livereload: true
             },
             app: {
-                files: ['app/**'],
-                tasks: ['build']
+                files: ['app/src/**', 'app/test/**'],
+                tasks: ['build', 'karma:unit']
             }
         },
 
@@ -189,16 +189,10 @@ module.exports = function (grunt) {
                 configFile: './app/test/unit/karma.conf.js',
                 autoWatch: false,
                 singleRun: true
-            },
-            unit_autowatch: {
-                configFile: './app/test/unit/karma.conf.js',
-                autoWatch: true,
-                singleRun: false
             }
         }
 
     });
-
 
     // Install tasks
     grunt.registerTask('install', ['shell:protractor_install']);
