@@ -15,7 +15,6 @@ module.exports = function (config) {
         ],
         frameworks: ['jasmine'],
         reporters: ['dots'],
-        browsers: ['Chrome'],
         colors: true
     });
 

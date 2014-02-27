@@ -28,6 +28,7 @@
     "grunt-angular-templates": "~0.5.3",
     "grunt-shell-spawn": "~0.3.0",
     "appium": "~0.15.0",
-    "ionic": "~0.9.16"
+    "ionic": "~0.9.16",
+    "phantomjs": "~1.9.7-1"
   }
 }

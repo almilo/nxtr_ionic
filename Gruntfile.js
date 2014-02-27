@@ -1,6 +1,9 @@
 module.exports = function (grunt) {
 
-    var path = require('path');
+    var testServerUrl = 'http://localhost:9999',
+        seleniumPort = 4723,
+        path = require('path');
+
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
     grunt.initConfig({
@@ -38,7 +41,8 @@ module.exports = function (grunt) {
         clean: {
             build: 'build',
             temp: 'temp',
-            instrumentscli: 'instrumentscli*/'
+            instrumentscli: 'instrumentscli*/',
+            phantomjslog: 'phantomjsdriver.log'
         },
 
         copy: {
@@ -127,8 +131,8 @@ module.exports = function (grunt) {
             ios_safari: {
                 options: {
                     args: {
-                        baseUrl: 'http://localhost:9999',
-                        seleniumPort: 4723,
+                        baseUrl: testServerUrl,
+                        seleniumPort: seleniumPort,
                         capabilities: {
                             browserName: '',
                             device: 'iphone',
@@ -141,7 +145,7 @@ module.exports = function (grunt) {
                 options: {
                     args: {
                         baseUrl: '',
-                        seleniumPort: 4723,
+                        seleniumPort: seleniumPort,
                         capabilities: {
                             browserName: '',
                             device: 'iphone',
@@ -153,9 +157,19 @@ module.exports = function (grunt) {
             singlerun: {
                 options: {
                     args: {
-                        baseUrl: 'http://localhost:9999',
+                        baseUrl: testServerUrl,
                         capabilities: {
                             'browserName': 'chrome'
+                        }
+                    }
+                }
+            },
+            headless: {
+                options: {
+                    args: {
+                        baseUrl: testServerUrl,
+                        capabilities: {
+                            'browserName': 'phantomjs'
                         }
                     }
                 }
@@ -164,8 +178,7 @@ module.exports = function (grunt) {
                 keepAlive: true,
                 options: {
                     args: {
-                        baseUrl: 'http://localhost:9999',
-
+                        baseUrl: testServerUrl,
                         capabilities: {
                             'browserName': 'chrome'
                         }
@@ -180,15 +193,21 @@ module.exports = function (grunt) {
             },
             app: {
                 files: ['app/src/**', 'app/test/**'],
-                tasks: ['build', 'karma:unit']
+                tasks: ['build', 'karma:chrome']
             }
         },
 
         karma: {
-            unit: {
+            options: {
                 configFile: './app/test/unit/karma.conf.js',
                 autoWatch: false,
                 singleRun: true
+            },
+            chrome: {
+                browsers: ['Chrome']
+            },
+            headless: {
+                browsers: ['PhantomJS']
             }
         }
 
@@ -201,11 +220,13 @@ module.exports = function (grunt) {
     grunt.registerTask('build', ['copy', 'ngtemplates', 'concat_sourcemap']);
 
     // Test tasks
-    grunt.registerTask('test:unit', ['karma:unit']);
+    grunt.registerTask('test:unit', ['karma:chrome']);
     grunt.registerTask('test:e2e', ['connect:testserver', 'protractor:singlerun']);
+    grunt.registerTask('test:e2e_headless', ['connect:testserver', 'protractor:headless']);
     grunt.registerTask('test:e2e_ios_safari', ['connect:testserver', 'shell:appium_start', 'protractor:ios_safari', 'shell:appium_start:kill']);
     grunt.registerTask('test:e2e_ios_app', ['shell:ios_build', 'shell:appium_start', 'protractor:ios_app', 'shell:appium_start:kill']);
     grunt.registerTask('test', ['test:unit', 'test:e2e']);
+    grunt.registerTask('test:headless', ['karma:headless', 'test:e2e_headless']);
 
     // Task to support the 'dev flow' that builds the web application, starts a web server with 'livereload' and
     // watches the source files to reload the application when changes are saved
@@ -219,5 +240,8 @@ module.exports = function (grunt) {
 
     // Builds the web application and performs a test run (both unit and e2e)
     grunt.registerTask('default', ['clean', 'build', 'test']);
+
+    // Builds the web application and performs a test run with a headless browser
+    grunt.registerTask('ci', ['clean', 'build', 'test:headless']);
 
 };
