@@ -154,7 +154,7 @@ module.exports = function (grunt) {
                     }
                 }
             },
-            singlerun: {
+            chrome: {
                 options: {
                     args: {
                         baseUrl: testServerUrl,
@@ -221,7 +221,7 @@ module.exports = function (grunt) {
 
     // Test tasks
     grunt.registerTask('test:unit', ['karma:chrome']);
-    grunt.registerTask('test:e2e', ['connect:testserver', 'protractor:singlerun']);
+    grunt.registerTask('test:e2e', ['connect:testserver', 'protractor:chrome']);
     grunt.registerTask('test:e2e_headless', ['connect:testserver', 'protractor:headless']);
     grunt.registerTask('test:e2e_ios_safari', ['connect:testserver', 'shell:appium_start', 'protractor:ios_safari', 'shell:appium_start:kill']);
     grunt.registerTask('test:e2e_ios_app', ['shell:ios_build', 'shell:appium_start', 'protractor:ios_app', 'shell:appium_start:kill']);
