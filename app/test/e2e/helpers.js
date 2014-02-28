@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function activateWebView(driver) {
+    var activateWebView = function (driver) {
         return driver.getAllWindowHandles()
             .then(function (handles) {
                 for (var handle in handles) {
@@ -16,5 +16,9 @@
             });
     }
 
-    exports.activateWebView = activateWebView;
+    exports.initApp = function () {
+        activateWebView(browser);
+        browser.get('');
+    }
+
 })();
