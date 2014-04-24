@@ -105,6 +105,7 @@ module.exports = function (grunt) {
             },
             devserver: {
                 options: {
+                    hostname: 'localhost',
                     port: 7777,
                     livereload: true,
                     open: true
@@ -112,6 +113,7 @@ module.exports = function (grunt) {
             },
             webserver: {
                 options: {
+                    hostname: 'localhost',
                     port: 8888,
                     keepalive: true,
                     open: true
@@ -119,6 +121,7 @@ module.exports = function (grunt) {
             },
             testserver: {
                 options: {
+                    hostname: 'localhost',
                     port: 9999
                 }
             }
