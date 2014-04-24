@@ -5,3 +5,4 @@ build
 temp
 instrumentscli*
 phantomjsdriver.log
+.DS_Store
