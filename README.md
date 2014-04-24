@@ -14,7 +14,8 @@ The App is itself a show case to demonstrate how to achieve the following goals:
 
 To install and build / run the application, please follow these steps:
  - Install NodeJS (npm required): follow instructions in http://nodejs.org or use 'homebrew' if already installed
- - Install Cordova: execute 'sudo npm -g cordova' (required to be installed globally because of the ionic framework CLI)
+ - Install grunt cli: 'sudo npm -g install grunt-cli'
+ - Install Cordova: execute 'sudo npm -g install cordova' (required to be installed globally because of the ionic framework CLI)
  - Clone the Github repository: 'git clone https://github.com/almilo/nxtr_ionic.git'
  - Once the repository has been cloned, execute:
     + 'cd <cloned_directory>' (ex: 'cd nxtr_ionic')
