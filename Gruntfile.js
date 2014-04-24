@@ -164,6 +164,16 @@ module.exports = function (grunt) {
                     }
                 }
             },
+            firefox: {
+                options: {
+                    args: {
+                        baseUrl: testServerUrl,
+                        capabilities: {
+                            'browserName': 'firefox'
+                        }
+                    }
+                }
+            },
             headless: {
                 options: {
                     args: {
@@ -180,7 +190,7 @@ module.exports = function (grunt) {
                     args: {
                         baseUrl: testServerUrl,
                         capabilities: {
-                            'browserName': 'chrome'
+                            'browserName': 'firefox'
                         }
                     }
                 }
@@ -193,7 +203,7 @@ module.exports = function (grunt) {
             },
             app: {
                 files: ['app/src/**', 'app/test/**'],
-                tasks: ['build', 'karma:chrome']
+                tasks: ['build', 'karma:firefox']
             }
         },
 
@@ -204,7 +214,10 @@ module.exports = function (grunt) {
                 singleRun: true
             },
             chrome: {
-                browsers: ['Chrome']
+              browsers: ['chrome']
+            },
+            firefox: {
+              browsers: ['Firefox']
             },
             headless: {
                 browsers: ['PhantomJS']
@@ -220,8 +233,8 @@ module.exports = function (grunt) {
     grunt.registerTask('build', ['copy', 'ngtemplates', 'concat_sourcemap']);
 
     // Test tasks
-    grunt.registerTask('test:unit', ['karma:chrome']);
-    grunt.registerTask('test:e2e', ['connect:testserver', 'protractor:chrome']);
+    grunt.registerTask('test:unit', ['karma:firefox']);
+    grunt.registerTask('test:e2e', ['connect:testserver', 'protractor:firefox']);
     grunt.registerTask('test:e2e_headless', ['connect:testserver', 'protractor:headless']);
     grunt.registerTask('test:e2e_ios_safari', ['connect:testserver', 'shell:appium_start', 'protractor:ios_safari', 'shell:appium_start:kill']);
     grunt.registerTask('test:e2e_ios_app', ['shell:ios_build', 'shell:appium_start', 'protractor:ios_app', 'shell:appium_start:kill']);
