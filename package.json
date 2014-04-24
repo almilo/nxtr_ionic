@@ -4,6 +4,10 @@
   "description": "The Next Train Mobile App with the ionic framework and AngularJS",
   "author": "almilo",
   "license": "MIT",
+  "repository" :{
+    "type": "git",
+    "url" : "https://github.com/almilo/nxtr_ionic.git"
+  },
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-copy": "~0.5.0",
